@@ -279,13 +279,7 @@ function Printer(name) {
 }
 
 Printer.list = function() {
-  return parseStdout(spawnSync('lpstat', ['-p']).stdout)
-    .filter(function(line) {
-      return line.match(/^printer/);
-    })
-    .map(function(printer) {
-      return printer.match(/^printer (\S+)/)[1];
-    });
+  return parseStdout(spawnSync('lpstat', ['-e']).stdout);
 };
 
 Printer.match = function(name) {
