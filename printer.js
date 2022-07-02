@@ -335,7 +335,14 @@ Printer.prototype.findJob = function(jobId) {
 Printer.prototype.printBuffer = function(data, options) {
   var self = this;
   var args = buildArgs(options);
+
+  if( options && typeof options.customLpFlags !== 'undefined' ) {
+    args = _.flatten([args, options.customLpFlags]);
+  }
+
   args.push('-d', self.name);
+
+  console.log(args);
 
   var lp = spawn('lp', args);
 
@@ -359,6 +366,11 @@ Printer.prototype.printText = Printer.prototype.printBuffer;
 Printer.prototype.printFile = function(filePath, options) {
   var self = this;
   var args = buildArgs(options);
+
+  if( options && typeof options.customLpFlags !== 'undefined' ) {
+    args = _.flatten([args, options.customLpFlags]);
+  }
+
   args.push('-d', self.name);
 
   args.push('--');
