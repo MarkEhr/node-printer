@@ -342,8 +342,6 @@ Printer.prototype.printBuffer = function(data, options) {
 
   args.push('-d', self.name);
 
-  console.log(args);
-
   var lp = spawn('lp', args);
 
   lp.stdin.write(data);
